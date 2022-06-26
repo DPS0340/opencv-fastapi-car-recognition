@@ -101,7 +101,7 @@ def detect_cars(video_id_without_ext: str, file_location: str):
         cars = car_cascade.detectMultiScale(gray, 1.1, 1)
 
         for (x, y, w, h) in cars:
-            cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 255), 2)
+            cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
         result.write(img)
 
