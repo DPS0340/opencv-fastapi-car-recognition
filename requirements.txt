@@ -1,0 +1,3 @@
+fastapi[all]
+opencv-python
+uvicorn

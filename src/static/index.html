@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Detection</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
+        integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <h1>Car Detection</h1>
+    <h2>Upload Video!</h2>
+
+    <div>
+        <label for="video">video:</label>
+        <input id="video" type="file" accept="video/*" />
+        <button onclick="submit()">Submit</button>
+    </div>
+
+    <script>
+        function submit() {
+            const video = document.querySelector("#video").files[0];
+            if (video == undefined) {
+                alert("파일이 업로드되지 않았습니다.");
+                return;
+            }
+            axios
+                .postForm("/predict", {
+                    video
+                })
+                .then(function (response) {
+                    console.log(response);
+
+                    const videoId = response?.data?.videoId;
+
+                    window.location.href = `/view/${videoId}`;
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        }
+    </script>
+</body>
+
+</html>
